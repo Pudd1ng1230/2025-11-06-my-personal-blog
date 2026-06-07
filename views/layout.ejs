@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <meta charset="UTF-8">
+  <title><%= title %></title>
+  <link rel="shortcut icon" href="/img/icon.png">
+  <link rel="icon" href="/img/icon.png" sizes="192x192">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <header>
+    <a href="/" class="header-logo">🍮</a>
+    <nav class="header-links">
+      <a href="/" class="nav-link">主页</a>
+      <a href="/archive" class="nav-link">归档</a>
+      <a href="/friends" class="nav-link">友链</a>
+      <a href="/guestbook" class="nav-link">留言</a>
+      <a href="/about" class="nav-link">关于</a>
+    </nav>
+    <div class="header-right">
+      <button id="themeBtn" class="theme-btn" title="切换暗色模式">
+        <i class="fas fa-moon"></i>
+      </button>
+      <a href="https://space.bilibili.com/415486087" class="social-item" target="_blank" title="哔哩哔哩">
+        <i class="fab fa-bilibili"></i>
+      </a>
+      <a href="https://github.com/Pudd1ng1230" class="social-item" target="_blank" title="GitHub">
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <%- body %>
+  </main>
+
+  <footer>
+    <p>© 2025 <a href="/">Pudd1ng</a></p>
+  </footer>
+
+  <script src="/js/theme.js"></script>
+  <script src="/js/effects.js"></script>
+</body>
+</html>

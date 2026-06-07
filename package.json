@@ -1,0 +1,17 @@
+{
+  "name": "pudd1ng-blog",
+  "version": "2.0.0",
+  "description": "Pudd1ng 个人博客 — Express 纯手写版",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express-ejs-layouts": "^2.5.1",
+    "express": "^5.1.0",
+    "front-matter": "^4.0.2",
+    "marked": "^15.0.12"
+  }
+}

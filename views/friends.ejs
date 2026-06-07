@@ -1,0 +1,91 @@
+<div class="wrap">
+  <section class="page-header">
+    <h1 class="page-title">🔗 友链</h1>
+    <p class="page-desc">朋友们的好地方</p>
+  </section>
+
+  <% if (friends.length === 0) { %>
+    <div class="empty-content">
+      <div class="empty-icon">🔗</div>
+      <h3>还没有友链</h3>
+    </div>
+  <% } else { %>
+    <!-- 搜索 + 标签筛选 -->
+    <div class="friends-filter">
+      <div class="filter-search">
+        <i class="fas fa-search"></i>
+        <input type="text" id="friendSearch" placeholder="搜索友链…">
+      </div>
+      <div class="filter-tags" id="filterTags">
+        <button class="tag-btn active" data-tag="all">全部</button>
+        <% allTags.forEach(tag => { %>
+          <button class="tag-btn" data-tag="<%= tag %>"><%= tag %></button>
+        <% }) %>
+      </div>
+    </div>
+
+    <!-- 友链卡片网格 -->
+    <div class="friends-grid" id="friendsGrid">
+      <% friends.forEach((f, i) => { %>
+        <a href="<%= f.siteurl %>" target="_blank" rel="noopener" class="friend-card" data-tags="<%= (f.tags||[]).join(',') %>" data-title="<%= f.title %>" data-desc="<%= f.desc %>" style="--i:<%= i %>">
+          <div class="friend-avatar">
+            <img src="<%= f.imgurl %>" alt="<%= f.title %>" loading="lazy">
+          </div>
+          <div class="friend-info">
+            <div class="friend-name"><%= f.title %></div>
+            <div class="friend-desc"><%= f.desc %></div>
+            <% if (f.tags && f.tags.length > 0) { %>
+              <div class="friend-tags">
+                <% f.tags.slice(0,3).forEach(tag => { %>
+                  <span><%= tag %></span>
+                <% }) %>
+              </div>
+            <% } %>
+          </div>
+        </a>
+      <% }) %>
+    </div>
+  <% } %>
+
+  <div class="friends-empty" id="friendsEmpty" style="display:none">
+    <p>😶 没有找到匹配的友链</p>
+  </div>
+</div>
+
+<script>
+// 友链筛选
+(function(){
+  const search = document.getElementById('friendSearch');
+  const tags = document.querySelectorAll('#filterTags .tag-btn');
+  const grid = document.getElementById('friendsGrid');
+  const empty = document.getElementById('friendsEmpty');
+  const cards = grid ? grid.querySelectorAll('.friend-card') : [];
+  let activeTag = 'all';
+
+  tags.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tags.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeTag = btn.dataset.tag;
+      filter();
+    });
+  });
+
+  if (search) search.addEventListener('input', filter);
+
+  function filter() {
+    const q = (search?.value || '').toLowerCase();
+    let visible = 0;
+    cards.forEach(card => {
+      const t = (card.dataset.tags || '').split(',');
+      const name = (card.dataset.title || '').toLowerCase();
+      const desc = (card.dataset.desc || '').toLowerCase();
+      const tagOk = activeTag === 'all' || t.includes(activeTag);
+      const searchOk = !q || name.includes(q) || desc.includes(q) || t.some(x => x.toLowerCase().includes(q));
+      if (tagOk && searchOk) { card.style.display = ''; visible++; }
+      else { card.style.display = 'none'; }
+    });
+    if (empty) empty.style.display = visible ? 'none' : 'block';
+  }
+})();
+</script>

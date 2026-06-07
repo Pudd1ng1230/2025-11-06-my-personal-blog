@@ -1,71 +1,70 @@
 # 🍮 Pudd1ng's Personal Blog
 
-基于 [Hexo 7.3.0](https://hexo.io/) 的个人博客，部署于 GitHub Pages。
+纯手写 **Express + EJS** 个人博客，零框架依赖。
 
-> 🔗 在线访问: [pudd1ng1230.github.io](https://pudd1ng1230.github.io)
+> 🔧 本地: `http://localhost:8888`
 
 ---
 
-## 技术栈
+## 快速开始
 
-| 层面 | 技术 |
-|------|------|
-| 静态生成 | Hexo 7.3.0 |
-| 主题 | Hingle (by Dreamer-Paul) + 自定义 |
-| 样式框架 | Kico |
-| 图标 | Font Awesome 6.0.0 |
-| 托管 | GitHub Pages |
-| 语言 | 中文 (zh-CN) |
+```bash
+npm install
+npm run dev    # 开发模式 (自动重启)
+npm start      # 生产模式
+```
+
+---
+
+## 功能
+
+- 🖼️ 全屏英雄区（背景图 + Canvas 粒子 + 打字机）
+- 📑 三栏布局（个人简介 / 分类筛选+文章 / 站点统计）
+- 🏷️ 四分类：测试 / 相册 / 絮语 / 探索
+- 📅 归档（按年月折叠）
+- 🔗 友链（卡片网格 + 标签筛选）
+- 💬 留言板
+- 🙋 关于页
+- 🌓 暗色模式（localStorage 持久化）
+
+---
+
+## 写文章
+
+`content/posts/YYYY-MM-DD-slug.md`：
+
+```markdown
+---
+title: 文章标题
+date: 2025-12-01
+category: 测试
+---
+正文 Markdown…
+```
 
 ---
 
 ## 项目结构
 
 ```
-.
-├── index.html                    # 首页
-├── 2025/11/06/欢迎来到我的博客/  # 文章 (按日期/标题)
-├── archives/                     # 归档
-├── categories/                   # 分类页 (日常/摄影/算法/随笔/探索)
-├── tags/                         # 标签页
-├── explore/                      # 探索页
-├── create/                       # 创作页
-├── interests/                    # 兴趣页
-├── css/
-│   ├── custom.css                # 核心自定义样式
-│   └── category.css              # 分类/列表样式
-└── static/
-    ├── sidebar.js                # 侧边栏交互
-    ├── panel.js                  # 面板切换
-    ├── kico.css / kico.js        # Kico 框架
-    ├── hingle.css / hingle.js    # Hingle 主题
-    └── img/                      # 图片资源
+├── server.js           # Express 入口
+├── views/              # EJS 模板
+├── public/             # CSS / JS / 图片
+├── content/posts/      # Markdown 文章
+├── content/pages/      # 独立页面 Markdown
+└── data/               # 友链 JSON
 ```
 
 ---
 
-## 功能特性
+## 部署
 
-- 🌓 暗色/亮色主题切换
-- 📱 响应式布局 + 侧边栏
-- 🏷️ 分类 + 标签双体系
-- 📅 按年月归档
-- 🔗 B站 / GitHub 社交链接
-
----
-
-## 本地运行
-
-由于仓库只包含 Hexo 的生成输出（非源码），直接在浏览器打开 `index.html` 即可预览（CDN 资源需联网）。
-
-完整开发环境（需要 Hexo 源码）：
 ```bash
-npm install -g hexo-cli
-hexo server        # → http://localhost:4000
+npm start              # → :8888
 ```
+
+配合 Nginx 反向代理 + 自有域名即可上线。
 
 ---
 
-## 许可证
-
-© 2025 Pudd1ng. 主题基于 [Hingle](https://github.com/Dreamer-Paul/Hingle)。
+© 2025 Pudd1ng · 纯手写 · 无框架

@@ -1,0 +1,34 @@
+<div class="wrap">
+  <section class="page-header">
+    <h1 class="page-title">📅 归档</h1>
+    <p class="page-desc">时光机 — 按月份浏览所有文章</p>
+  </section>
+
+  <% if (archives.length === 0) { %>
+    <div class="empty-content">
+      <div class="empty-icon">📭</div>
+      <h3>还没有文章</h3>
+    </div>
+  <% } else { %>
+    <div class="archive-list">
+      <% archives.forEach(([year, months]) => { %>
+        <details class="archive-year" open>
+          <summary class="archive-year-title"><%= year %> 年 <span>(共 <%= Object.values(months).flat().length %> 篇)</span></summary>
+          <% Object.entries(months).forEach(([month, posts]) => { %>
+            <div class="archive-group">
+              <h3 class="archive-month"><%= month %> 月</h3>
+              <ul class="archive-posts">
+                <% posts.forEach(post => { %>
+                  <li class="archive-item">
+                    <time><%= post.month %>-<%= post.day %></time>
+                    <a href="/post/<%= post.slug %>"><%= post.title %></a>
+                  </li>
+                <% }) %>
+              </ul>
+            </div>
+          <% }) %>
+        </details>
+      <% }) %>
+    </div>
+  <% } %>
+</div>

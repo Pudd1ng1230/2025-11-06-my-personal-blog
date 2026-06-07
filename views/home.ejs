@@ -1,0 +1,89 @@
+<!-- 全屏英雄区 -->
+<section class="home-hero" id="hero">
+  <div class="hero-bg"></div>
+  <canvas id="particles"></canvas>
+  <div class="hero-content">
+    <h1 class="hero-title">Pudd1ng</h1>
+    <div class="hero-subtitle">
+      <span id="typewriter"></span><span class="cursor">|</span>
+    </div>
+  </div>
+  <div class="hero-gradient"></div>
+  <div class="scroll-arrow" id="scrollArrow">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</section>
+
+<!-- 内容区：三栏布局 -->
+<section class="home-posts" id="posts">
+  <div class="posts-layout">
+    <!-- 左侧：个人简介 -->
+    <aside class="posts-sidebar posts-left">
+      <div class="side-card profile-card">
+        <div class="profile-avatar">🍮</div>
+        <div class="profile-name">Pudd1ng</div>
+        <div class="profile-desc">热爱编程、摄影、探索。<br>Stay hungry, stay foolish.</div>
+        <div class="profile-links">
+          <a href="https://github.com/Pudd1ng1230" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="https://space.bilibili.com/415486087" target="_blank"><i class="fab fa-bilibili"></i></a>
+        </div>
+      </div>
+    </aside>
+
+    <!-- 中间：分类导航 + 文章列表 -->
+    <main class="posts-center">
+      <!-- 分类导航 -->
+      <nav class="cat-nav">
+        <% categories.forEach(c => { %>
+          <a href="/?cat=<%= encodeURIComponent(c) %>#posts" class="cat-tab <%= c === activeCat ? 'active' : '' %>"><%= c %></a>
+        <% }) %>
+      </nav>
+
+      <!-- 文章 -->
+      <div class="posts-list">
+        <% if (posts.length === 0) { %>
+          <div class="empty-content">
+            <div class="empty-icon">📝</div>
+            <h3>这个分类还没有文章</h3>
+          </div>
+        <% } else { %>
+          <% posts.forEach((post, i) => { %>
+            <article class="post-card reveal" style="--delay: <%= i %>">
+              <h2><a href="/post/<%= post.slug %>"><%= post.title %></a></h2>
+              <p class="post-excerpt"><%= post.excerpt %></p>
+              <div class="post-meta">
+                <time><%= post.year %>.<%= post.month %>.<%= post.day %></time>
+                <span class="post-cat"><%= post.category %></span>
+              </div>
+            </article>
+          <% }) %>
+        <% } %>
+      </div>
+    </main>
+
+    <!-- 右侧：站点统计 -->
+    <aside class="posts-sidebar posts-right">
+      <div class="side-card stats-card">
+        <h3>📊 站点统计</h3>
+        <div class="stat-item">
+          <span class="stat-label">文章</span>
+          <span class="stat-value"><%= stats.articleCount %></span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">总字数</span>
+          <span class="stat-value"><%= stats.totalWords %></span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">运行时间</span>
+          <span class="stat-value"><%= stats.runDays %> 天</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">最后更新</span>
+          <span class="stat-value"><%= stats.lastUpdate %></span>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
